@@ -1,0 +1,129 @@
+---
+import React from "../components/icons/React.astro";
+import Javascript from "../components/icons/JavaScript.astro";
+import Tailwind from "../components/icons/Tailwind.astro";
+import Redux from "../components/icons/Redux.astro";
+import MaterialUI from "../components/icons/MaterialUI.astro";
+import StyledComponents from "../components/icons/StyledComponents.astro";
+import Github from "../components/icons/Github.astro";
+import Link from "../components/icons/Link.astro";
+import LinkButton from "./LinkButton.astro";
+import Carrusel from "../components/Carrusel.astro";
+import Typescript from "./icons/Typescript.astro";
+
+const TAGS = {
+  REACT: {
+    name: "React",
+    class: "bg-sky-800	 text-white",
+    icon: React,
+  },
+  TYPESCRIPT: {
+    name: "Typescript",
+    class: "bg-blue-800 text-white",
+    icon: Typescript,
+  },
+  JAVASCRIPT: {
+    name: "Javascript",
+    class: "bg-purple-500 text-white",
+    icon: Javascript,
+  },
+  TAILWIND: {
+    name: "Tailwind",
+    class: "bg-teal-600	 text-white",
+    icon: Tailwind,
+  },
+  MATERIALUI: {
+    name: "MaterialUI",
+    class: "bg-sky-700 text-white",
+    icon: MaterialUI,
+  },
+  STYLEDCOMPONENTS: {
+    name: "StyledComponents",
+    class: "bg-white text-black",
+    icon: StyledComponents,
+  },
+  REDUX: {
+    name: "Redux",
+    class: "bg-sky-800 text-white",
+    icon: Redux,
+  },
+};
+
+const IMAGES = {
+  UCABProfile: ["images/cap1.png", "images/cap2.png", "images/cap3.png"],
+  Offside: ["images/cap7.png", "images/cap8.png", "images/cap9.png"],
+};
+
+const PROJECTS = [
+  {
+    title: "UCAB-Profile",
+    description:
+      "Plataforma web diseñada para funcionar como un catálogo de egresados de la Universidad Católica Andrés Bello, ofreciendo la capacidad de crear y presentar un CV y un portafolio personal.",
+    link: "https://ucab-profile-deploy.vercel.app",
+    github: "https://github.com/EquestriaReapers/ER-frontend",
+    images: IMAGES.UCABProfile,
+    tags: [TAGS.REACT, TAGS.TYPESCRIPT, TAGS.MATERIALUI, TAGS.STYLEDCOMPONENTS],
+  },
+  {
+    title: "Offside",
+    description: "Offside es una plataforma web donde puedes coleccionar y cambiar cromos del Mundial de Qatar 2022. Puedes ver los cromos que te faltan en el Álbum, armar tu propio equipo de fantasy fútbol, intercambiar cromos con otros coleccionistas en el mercado, y los administradores pueden controlar todo desde el Panel de Administración.",
+    link: "https://playoffside.online",
+    github: "https://github.com/Nannajpg/IDS-admin-panel",
+    images: IMAGES.Offside,
+    tags: [TAGS.REACT, TAGS.JAVASCRIPT, TAGS.TAILWIND],
+  },
+];
+---
+
+<div class="flex flex-col gap-y-16">
+  {
+    PROJECTS.map(({ images, title, description, tags, link, github }) => (
+      <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
+        <div class="w-full md:w-1/2">
+          <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
+            <Carrusel images={images} />
+            {console.log(images)}
+          </div>
+        </div>
+
+        <div class="w-full md:w-1/2 md:max-w-lg">
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+            {title}
+          </h3>
+          <div class="flex flex-wrap mt-2">
+            <ul class="flex flex-row mb-2 gap-x-2 ">
+              {tags.map((tag) => (
+                <li>
+                  <span
+                    class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 `}
+                  >
+                    <tag.icon class="size-4" />
+                    {tag.name}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-2 text-gray-700 dark:text-gray-400">
+              {description}
+            </div>
+            <footer class="flex items-end justify-start mt-4 gap-x-4">
+              {github && (
+                <LinkButton href={github}>
+                  <Github class="size-6" />
+                  Code
+                </LinkButton>
+              )}
+              {link && (
+                <LinkButton href={link}>
+                  <Link class="size-4" />
+                  Preview
+                </LinkButton>
+              )}
+            </footer>
+          </div>
+        </div>
+      </article>
+    ))
+  }
+</div>

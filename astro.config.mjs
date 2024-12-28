@@ -6,5 +6,5 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   integrations: [tailwind()],
   site: 'https://nannajpg.github.io',
-  base: 'my-portfolio',
+  base: 'nannajpg.github.io',
 });
